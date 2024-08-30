@@ -12,24 +12,17 @@ struct CoinModel: Identifiable, Codable {
     let id, symbol, name: String
     let image: String
     let currentPrice: Double
-    let marketCap, marketCapRank, fullyDilutedValuation: Double?
+    let marketCap, marketCapRank: Double?
     let totalVolume, high24H, low24H: Double?
     let priceChange24H, priceChangePercentage24H: Double?
     let marketCapChange24H: Double?
     let marketCapChangePercentage24H: Double?
-    let circulatingSupply, totalSupply, maxSupply, ath: Double?
-    let athChangePercentage: Double?
-    let athDate: String?
-    let atl, atlChangePercentage: Double?
-    let atlDate: String?
-    let lastUpdated: String?
     
     enum CodingKeys: String, CodingKey {
         case id, symbol, name, image
         case currentPrice = "current_price"
         case marketCap = "market_cap"
         case marketCapRank = "market_cap_rank"
-        case fullyDilutedValuation = "fully_diluted_valuation"
         case totalVolume = "total_volume"
         case high24H = "high_24h"
         case low24H = "low_24h"
@@ -37,15 +30,24 @@ struct CoinModel: Identifiable, Codable {
         case priceChangePercentage24H = "price_change_percentage_24h"
         case marketCapChange24H = "market_cap_change_24h"
         case marketCapChangePercentage24H = "market_cap_change_percentage_24h"
-        case circulatingSupply = "circulating_supply"
-        case totalSupply = "total_supply"
-        case maxSupply = "max_supply"
-        case ath
-        case athChangePercentage = "ath_change_percentage"
-        case athDate = "ath_date"
-        case atl
-        case atlChangePercentage = "atl_change_percentage"
-        case atlDate = "atl_date"
-        case lastUpdated = "last_updated"
+    }
+    
+    static var mock: CoinModel {
+        CoinModel(
+            id: "bitcoin",
+            symbol: "btc",
+            name: "Bitcoin",
+            image: "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+            currentPrice: 60898,
+            marketCap: 1202176836230,
+            marketCapRank: 1,
+            totalVolume: 35595543245,
+            high24H: 61009,
+            low24H: 57968,
+            priceChange24H: 2155.47,
+            priceChangePercentage24H: 3.66936,
+            marketCapChange24H: 42049351821,
+            marketCapChangePercentage24H: 3.62455
+        )
     }
 }
