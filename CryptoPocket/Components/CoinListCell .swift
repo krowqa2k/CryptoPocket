@@ -9,10 +9,10 @@ import SwiftUI
 
 struct CoinListCell: View {
     
-    let coin: CoinModel = .mock
+    var coin: CoinModel = .mock
     
     var body: some View {
-        HStack {
+        HStack(spacing: 4) {
             coinImgNameSym
             
             Spacer(minLength: 0)
@@ -20,7 +20,6 @@ struct CoinListCell: View {
             coinData
         }
         .frame(height: 40)
-        .padding(.horizontal)
     }
     
     private var coinImgNameSym: some View {
@@ -38,6 +37,7 @@ struct CoinListCell: View {
                     .foregroundStyle(.secondaryTextCP)
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     private var coinData: some View {
@@ -55,8 +55,6 @@ struct CoinListCell: View {
                 .foregroundStyle(.green)
             } else {
                 Group {
-                    Text("-")
-                    +
                     Text(String(format: "%.2f", coin.priceChangePercentage24H))
                     +
                     Text("%")
@@ -68,10 +66,11 @@ struct CoinListCell: View {
             Text("$")
                 .foregroundStyle(.textCP)
             +
-            Text("\(coin.currentPrice.formatted())")
+            Text(String(format: "%.2f", coin.currentPrice))
                 .font(.headline)
                 .foregroundStyle(.textCP)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
