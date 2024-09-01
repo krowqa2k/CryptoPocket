@@ -21,9 +21,8 @@ final class HomeViewModel: ObservableObject {
         do {
             let coinData = try await coinDataManager.getCoinData()
             
-            let decodedCoins = try JSONDecoder().decode([CoinModel].self, from: coinData)
+            self.allCoins = coinData
             
-            self.allCoins = decodedCoins
         } catch {
             print("Failed to fetch coins \(error)")
         }

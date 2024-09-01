@@ -9,9 +9,9 @@ import Foundation
 
 @MainActor
 final class CoinService: ObservableObject {
-    func getCoinData() async throws -> Data {
+    func getCoinData() async throws -> [CoinModel] {
         
-        let urlString: String = "https://api.coingecko.com/api/v3/coins/markets"
+        let urlString: String = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=24h"
         
         guard let url = URL(string: urlString) else {
             throw ErrorCases.InvalidURL
@@ -23,7 +23,8 @@ final class CoinService: ObservableObject {
             if let response = response as? HTTPURLResponse {
                 switch response.statusCode {
                 case 200:
-                    return data
+                    let decoder = try JSONDecoder().decode([CoinModel].self, from: data)
+                    return decoder
                 default:
                     throw ErrorCases.InvalidResponse
                 }
