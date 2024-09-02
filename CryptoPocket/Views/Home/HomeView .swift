@@ -8,17 +8,37 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @State var index: Int
+    
     var body: some View {
         ZStack {
             background
             
-            VStack(spacing: 32) {
-                HeaderView()
-                
-                UserBalanceView()
+            VStack {
+                switch index {
+                case 0:
+                    defaultView
+                case 1:
+                    AllCoinsList()
+                default:
+                    defaultView
+                }
                 
                 Spacer(minLength: 0)
+                TabView(index: $index)
             }
+            .ignoresSafeArea(edges: .bottom)
+        }
+    }
+    
+    private var defaultView: some View {
+        VStack(spacing: 32) {
+            HeaderView()
+            
+            UserBalanceView()
+            
+            Spacer(minLength: 0)
         }
     }
     
@@ -31,5 +51,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(index: 0)
 }

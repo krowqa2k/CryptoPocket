@@ -11,7 +11,7 @@ import SwiftUI
 struct CryptoPocketApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            HomeView(index: 0)
         }
     }
 }
