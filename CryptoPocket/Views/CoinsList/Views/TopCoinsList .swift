@@ -10,43 +10,114 @@ import SwiftUI
 struct AllCoinsList: View {
     
     @ObservedObject private var viewModel = CoinsViewModel()
+    @State private var buttonIndex: Int = 0
+    @State var searchCoin: String = ""
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text("All Coins")
-                .font(.title3)
-                .foregroundStyle(.textCP)
-                .fontWeight(.medium)
-            
-            Divider()
-                .background(Color.secondaryTextCP.opacity(0.5))
-                .padding(.top, 8)
-            
-            HStack {
-                Text("Coin")
-                Spacer()
-                Text("Price Change")
-                    .offset(x: 30)
-                Spacer()
-                Text("Price")
-            }
-            .padding(.top, 8)
-            .padding(.horizontal)
-            .font(.caption)
-            .foregroundStyle(.textCP)
-            
-            ScrollView(.vertical) {
-                ForEach(viewModel.allCoins) { coin in
-                    CoinListCell(coin: coin)
-                        .padding(.top)
+        ZStack {
+            Color.backgroundCP.ignoresSafeArea()
+            VStack(alignment: .leading, spacing: 4) {
+                Text("All Coins")
+                    .font(.title3)
+                    .foregroundStyle(.textCP)
+                    .fontWeight(.medium)
+                
+                Divider()
+                    .background(Color.secondaryTextCP.opacity(0.5))
+                    .padding(.top, 8)
+                
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .font(.title2)
+                        .foregroundStyle(.textCP)
+                        .padding(.leading, 2)
+                        .padding(.top, 2)
+                    
+                    TextField("Search coin...", text: $searchCoin) {
+                        viewModel.filterCoins(search: searchCoin)
+                    }
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .tint(.backgroundCP)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                    
+                    if !searchCoin.isEmpty {
+                        Image(systemName: "xmark.circle.fill")
+                            .padding(.horizontal, 8)
+                            .foregroundStyle(.textCP)
+                            .background(Color.black.opacity(0.001))
+                            .onTapGesture {
+                               searchCoin = ""
+                                Task {
+                                    await viewModel.fetchCoins()
+                                }
+                            }
+                    }
                 }
+                
+                filterButtons
+                
+                ScrollView(.vertical) {
+                    ForEach(viewModel.allCoins) { coin in
+                        CoinListCell(coin: coin)
+                            .padding(.top)
+                    }
+                }
+                .scrollIndicators(.hidden)
             }
-            .scrollIndicators(.hidden)
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
         .task {
             await viewModel.fetchCoins()
         }
+    }
+    
+    private var filterButtons: some View {
+        HStack {
+            Button(action: {
+                self.buttonIndex = 0
+                viewModel.sortCoins(by: .marketCap)
+            }, label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .frame(width: 60, height: 20)
+                        .foregroundStyle(.secondaryTextCP.opacity(self.buttonIndex == 0 ? 0.5 : 0.0))
+                    Text("Coin")
+                        .foregroundStyle(self.buttonIndex == 0 ? .textCP : .secondaryTextCP)
+                }
+            })
+            
+            Spacer()
+            Button(action: {
+                self.buttonIndex = 1
+                viewModel.sortCoins(by: .priceChange)
+            }, label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .frame(width: 100, height: 20)
+                        .foregroundStyle(.secondaryTextCP.opacity(self.buttonIndex == 1 ? 0.5 : 0.0))
+                    Text("Price Change")
+                        .foregroundStyle(self.buttonIndex == 1 ? .textCP : .secondaryTextCP)
+                }
+            })
+            .offset(x: 30)
+            Spacer()
+            Button(action: {
+                self.buttonIndex = 2
+                viewModel.sortCoins(by: .price)
+            }, label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .frame(width: 60, height: 20)
+                        .foregroundStyle(.secondaryTextCP.opacity(self.buttonIndex == 2 ? 0.5 : 0.0))
+                    Text("Price")
+                        .foregroundStyle(self.buttonIndex == 2 ? .textCP : .secondaryTextCP)
+                }
+            })
+        }
+        .padding(.top, 8)
+        .padding(.horizontal)
+        .font(.caption)
     }
 }
 
