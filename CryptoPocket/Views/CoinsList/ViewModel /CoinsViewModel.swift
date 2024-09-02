@@ -1,16 +1,16 @@
 //
-//  HomeViewModel.swift
+//  CoinsViewModel.swift
 //  CryptoPocket
 //
-//  Created by Mateusz Krówczyński on 30/08/2024.
+//  Created by Mateusz Krówczyński on 02/09/2024.
 //
 
 import Foundation
 
 @MainActor
-final class HomeViewModel: ObservableObject {
+final class CoinsViewModel: ObservableObject {
     
-    @Published private(set) var topCoins: [CoinModel] = []
+    @Published private(set) var allCoins: [CoinModel] = []
     @Published var isLoading: Bool = false
     
     let coinDataManager = CoinService()
@@ -21,7 +21,7 @@ final class HomeViewModel: ObservableObject {
         do {
             let coinData = try await coinDataManager.getCoinData()
             
-            self.topCoins = coinData
+            self.allCoins = coinData
             
         } catch {
             print("Failed to fetch coins \(error)")

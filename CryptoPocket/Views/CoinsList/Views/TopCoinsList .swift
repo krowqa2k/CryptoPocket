@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct TopCoinsList: View {
+struct AllCoinsList: View {
     
-    @ObservedObject private var viewModel = HomeViewModel()
+    @ObservedObject private var viewModel = CoinsViewModel()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Popular Coins")
+            Text("All Coins")
                 .font(.title3)
                 .foregroundStyle(.textCP)
                 .fontWeight(.medium)
@@ -36,7 +36,7 @@ struct TopCoinsList: View {
             .foregroundStyle(.textCP)
             
             ScrollView(.vertical) {
-                ForEach(viewModel.allCoins.prefix(15)) { coin in
+                ForEach(viewModel.allCoins) { coin in
                     CoinListCell(coin: coin)
                         .padding(.top)
                 }
@@ -53,6 +53,6 @@ struct TopCoinsList: View {
 #Preview {
     ZStack {
         Color.backgroundCP.ignoresSafeArea()
-        TopCoinsList()
+        AllCoinsList()
     }
 }
