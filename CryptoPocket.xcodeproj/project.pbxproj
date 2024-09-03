@@ -25,6 +25,9 @@
 		C1D0437C2C81F9D000CE1332 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0437B2C81F9D000CE1332 /* HeaderView.swift */; };
 		C1D0437E2C81FBBB00CE1332 /* HomeView .swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0437D2C81FBBB00CE1332 /* HomeView .swift */; };
 		C1DD7D732C87485200EB550C /* FavoriteCoinCell .swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DD7D722C87485200EB550C /* FavoriteCoinCell .swift */; };
+		C1DD7D772C8753DB00EB550C /* CoinOverviewView .swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DD7D762C8753DB00EB550C /* CoinOverviewView .swift */; };
+		C1DD7D7A2C8754D400EB550C /* DetailViewModel .swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DD7D792C8754D400EB550C /* DetailViewModel .swift */; };
+		C1DD7D7C2C8756A300EB550C /* CoinDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DD7D7B2C8756A300EB550C /* CoinDetailService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,9 @@
 		C1D0437B2C81F9D000CE1332 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		C1D0437D2C81FBBB00CE1332 /* HomeView .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeView .swift"; sourceTree = "<group>"; };
 		C1DD7D722C87485200EB550C /* FavoriteCoinCell .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteCoinCell .swift"; sourceTree = "<group>"; };
+		C1DD7D762C8753DB00EB550C /* CoinOverviewView .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoinOverviewView .swift"; sourceTree = "<group>"; };
+		C1DD7D792C8754D400EB550C /* DetailViewModel .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewModel .swift"; sourceTree = "<group>"; };
+		C1DD7D7B2C8756A300EB550C /* CoinDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +172,9 @@
 		C1D043722C81F80B00CE1332 /* CoinDetails */ = {
 			isa = PBXGroup;
 			children = (
+				C1DD7D782C8754B300EB550C /* ViewModel */,
+				C1DD7D752C87515200EB550C /* Components */,
+				C1DD7D742C87513A00EB550C /* View */,
 			);
 			path = CoinDetails;
 			sourceTree = "<group>";
@@ -190,6 +199,7 @@
 			children = (
 				C18793CE2C81FF24006CCAB6 /* CoinService .swift */,
 				C18793D22C82022D006CCAB6 /* ErrorCases.swift */,
+				C1DD7D7B2C8756A300EB550C /* CoinDetailService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -234,6 +244,29 @@
 				C1D0437B2C81F9D000CE1332 /* HeaderView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C1DD7D742C87513A00EB550C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C1DD7D752C87515200EB550C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C1DD7D762C8753DB00EB550C /* CoinOverviewView .swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C1DD7D782C8754B300EB550C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C1DD7D792C8754D400EB550C /* DetailViewModel .swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,7 +357,10 @@
 				C1CC52232C80E1F10060E47A /* CryptoPocketApp.swift in Sources */,
 				C1D0437E2C81FBBB00CE1332 /* HomeView .swift in Sources */,
 				C18793D12C81FF4D006CCAB6 /* CoinModel.swift in Sources */,
+				C1DD7D7A2C8754D400EB550C /* DetailViewModel .swift in Sources */,
+				C1DD7D7C2C8756A300EB550C /* CoinDetailService.swift in Sources */,
 				C1D0437C2C81F9D000CE1332 /* HeaderView.swift in Sources */,
+				C1DD7D772C8753DB00EB550C /* CoinOverviewView .swift in Sources */,
 				C12B07352C84EB75001CCD61 /* CoinListCell .swift in Sources */,
 				C12B07312C84EAC9001CCD61 /* Constants.swift in Sources */,
 			);
