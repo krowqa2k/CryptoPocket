@@ -24,6 +24,7 @@ struct FavoriteCoinCell: View {
         .padding(2)
         .background(
             RoundedRectangle(cornerRadius: 12)
+                .fill(Color.backgroundCP)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 12)
