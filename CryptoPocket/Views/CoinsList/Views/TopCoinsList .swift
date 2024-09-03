@@ -96,7 +96,7 @@ struct AllCoinsList: View {
                     RoundedRectangle(cornerRadius: 12)
                         .frame(width: 100, height: 20)
                         .foregroundStyle(.secondaryTextCP.opacity(self.buttonIndex == 1 ? 0.5 : 0.0))
-                    Text("Price Change")
+                    Text("Price Change 24h")
                         .foregroundStyle(self.buttonIndex == 1 ? .textCP : .secondaryTextCP)
                 }
             })
