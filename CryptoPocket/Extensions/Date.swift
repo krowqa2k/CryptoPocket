@@ -16,4 +16,13 @@ extension Date {
         self.init(timeInterval: 0, since: date)
     }
     
+    private var shortFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter
+    }
+    
+    func asShortDateString() -> String {
+        return shortFormatter.string(from: self)
+    }
 }
