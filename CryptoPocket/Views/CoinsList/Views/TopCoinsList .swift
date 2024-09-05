@@ -12,6 +12,7 @@ struct AllCoinsList: View {
     @ObservedObject private var viewModel = CoinsViewModel()
     @State private var buttonIndex: Int = 0
     @State var searchCoin: String = ""
+    @State private var refreshTapped: Bool = false
     
     var body: some View {
         ZStack {
@@ -86,22 +87,23 @@ struct AllCoinsList: View {
                         .foregroundStyle(self.buttonIndex == 0 ? .textCP : .secondaryTextCP)
                 }
             })
+            .frame(maxWidth: .infinity, alignment: .leading)
             
-            Spacer()
             Button(action: {
                 self.buttonIndex = 1
                 viewModel.sortCoins(by: .priceChange)
             }, label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
-                        .frame(width: 100, height: 20)
+                        .frame(width: 120, height: 20)
                         .foregroundStyle(.secondaryTextCP.opacity(self.buttonIndex == 1 ? 0.5 : 0.0))
                     Text("Price Change 24h")
                         .foregroundStyle(self.buttonIndex == 1 ? .textCP : .secondaryTextCP)
                 }
             })
             .offset(x: 30)
-            Spacer()
+            .frame(maxWidth: .infinity)
+            
             Button(action: {
                 self.buttonIndex = 2
                 viewModel.sortCoins(by: .price)
@@ -114,9 +116,27 @@ struct AllCoinsList: View {
                         .foregroundStyle(self.buttonIndex == 2 ? .textCP : .secondaryTextCP)
                 }
             })
+            .frame(maxWidth: .infinity)
+            
+            Button(action: {
+                Task {
+                    await viewModel.fetchCoins()
+                }
+                refreshTapped.toggle()
+                buttonIndex = 0
+            }, label: {
+                withAnimation {
+                    Image(systemName: "arrow.uturn.forward")
+                        .font(.system(size: 15))
+                        .foregroundStyle(.secondaryTextCP)
+                        .rotationEffect(.degrees(refreshTapped ? 360 : 0))
+                        .animation(.smooth(duration: 1), value: refreshTapped)
+                }
+            })
+            .offset(x: 10)
         }
         .padding(.top, 8)
-        .padding(.horizontal)
+        .padding(.horizontal, 4)
         .font(.caption)
     }
 }
