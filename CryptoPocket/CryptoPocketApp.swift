@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct CryptoPocketApp: App {
+    
+    @StateObject private var viewModel = HomeViewModel()
+    
     var body: some Scene {
         WindowGroup {
             HomeView(index: 0)
+                .environmentObject(viewModel)
         }
     }
 }
