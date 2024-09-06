@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @State var index: Int
+    @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
         ZStack {
@@ -33,12 +34,26 @@ struct HomeView: View {
     }
     
     private var defaultView: some View {
-        VStack(spacing: 32) {
-            HeaderView()
-            
-            UserBalanceView()
-            
-            Spacer(minLength: 0)
+        NavigationStack {
+            ZStack {
+                background
+                VStack(spacing: 32) {
+                    HeaderView()
+                    
+                    UserBalanceView()
+                    
+                    ScrollView(.vertical) {
+                        ForEach(viewModel.topCoins.prefix(15)) { coin in
+                            NavigationLink(destination: CoinDetailsView(coin: coin)) {
+                                HomeCoinListCell(coin: coin)
+                            }
+                        }
+                    }
+                }
+                .task {
+                    await viewModel.fetchCoins()
+                }
+            }
         }
     }
     
@@ -52,4 +67,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView(index: 0)
+        .environmentObject(HomeViewModel())
 }
