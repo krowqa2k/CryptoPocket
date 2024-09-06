@@ -15,61 +15,65 @@ struct AllCoinsList: View {
     @State private var refreshTapped: Bool = false
     
     var body: some View {
-        ZStack {
-            Color.backgroundCP.ignoresSafeArea()
-            VStack(alignment: .leading, spacing: 4) {
-                Text("All Coins")
-                    .font(.title3)
-                    .foregroundStyle(.textCP)
-                    .fontWeight(.medium)
-                
-                Divider()
-                    .background(Color.secondaryTextCP.opacity(0.5))
-                    .padding(.top, 8)
-                
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .font(.title2)
+        NavigationStack {
+            ZStack {
+                Color.backgroundCP.ignoresSafeArea()
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("All Coins")
+                        .font(.title3)
                         .foregroundStyle(.textCP)
-                        .padding(.leading, 2)
-                        .padding(.top, 2)
+                        .fontWeight(.medium)
                     
-                    TextField("Search coin...", text: $searchCoin) {
-                        viewModel.filterCoins(search: searchCoin)
-                    }
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .tint(.backgroundCP)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
+                    Divider()
+                        .background(Color.secondaryTextCP.opacity(0.5))
+                        .padding(.top, 8)
                     
-                    if !searchCoin.isEmpty {
-                        Image(systemName: "xmark.circle.fill")
-                            .padding(.horizontal, 8)
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .font(.title2)
                             .foregroundStyle(.textCP)
-                            .background(Color.black.opacity(0.001))
-                            .onTapGesture {
-                               searchCoin = ""
-                                Task {
-                                    await viewModel.fetchCoins()
+                            .padding(.leading, 2)
+                            .padding(.top, 2)
+                        
+                        TextField("Search coin...", text: $searchCoin) {
+                            viewModel.filterCoins(search: searchCoin)
+                        }
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .tint(.backgroundCP)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        
+                        if !searchCoin.isEmpty {
+                            Image(systemName: "xmark.circle.fill")
+                                .padding(.horizontal, 8)
+                                .foregroundStyle(.textCP)
+                                .background(Color.black.opacity(0.001))
+                                .onTapGesture {
+                                   searchCoin = ""
+                                    Task {
+                                        await viewModel.fetchCoins()
+                                    }
                                 }
+                        }
+                    }
+                    
+                    filterButtons
+                    
+                    ScrollView(.vertical) {
+                        ForEach(viewModel.allCoins) { coin in
+                            NavigationLink(destination: CoinDetailsView(coin: coin)) {
+                                CoinListCell(coin: coin)
+                                    .padding(.top)
                             }
+                        }
                     }
+                    .scrollIndicators(.hidden)
                 }
-                
-                filterButtons
-                
-                ScrollView(.vertical) {
-                    ForEach(viewModel.allCoins) { coin in
-                        CoinListCell(coin: coin)
-                            .padding(.top)
-                    }
-                }
-                .scrollIndicators(.hidden)
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
+            .task {
+                await viewModel.fetchCoins()
         }
-        .task {
-            await viewModel.fetchCoins()
         }
     }
     
