@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct HeaderView: View {
+    
+    @State private var showSheet: Bool = false
+    
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
-                    //TODO: app info sheet pop up
+                    showSheet = true
                 }, label: {
                     Image(systemName: "info.circle.fill")
                         .font(.title2)
@@ -39,6 +42,9 @@ struct HeaderView: View {
                 .padding(.top, 14)
         }
         .frame(maxWidth: .infinity, alignment: .top)
+        .sheet(isPresented: $showSheet, content: {
+            AppInfo()
+        })
         
     }
 }
