@@ -46,7 +46,7 @@ struct CoinListCell: View {
                 Group {
                     Text("+")
                     +
-                    Text(String(format: "%.2f", coin.priceChangePercentage24H))
+                    Text(coin.priceChangePercentage24H.asNumberString())
                     +
                     Text("%")
                 }
@@ -55,7 +55,7 @@ struct CoinListCell: View {
                 .foregroundStyle(.green)
             } else {
                 Group {
-                    Text(String(format: "%.2f", coin.priceChangePercentage24H))
+                    Text(coin.priceChangePercentage24H.asNumberString())
                     +
                     Text("%")
                 }
@@ -66,7 +66,7 @@ struct CoinListCell: View {
             Text("$")
                 .foregroundStyle(.textCP)
             +
-            Text(String(format: "%.2f", coin.currentPrice))
+            Text(coin.currentPrice.asNumberString())
                 .font(.headline)
                 .foregroundStyle(.textCP)
         }

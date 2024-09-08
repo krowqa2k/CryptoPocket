@@ -29,17 +29,17 @@ struct HomeCoinListCell: View {
             Spacer(minLength: 0)
             
             VStack(alignment: .trailing, spacing: 4) {
-                Text("$\(String(format: "%.2f", coin.currentPrice))")
+                Text(coin.currentPrice.asCurrencyWith6Decimals())
                     .font(.callout)
                     .fontWeight(.semibold)
                     .foregroundStyle(.textCP)
                 
                 if coin.priceChangePercentage24H > 0 {
-                    Text("+\(String(format: "%.2f", coin.priceChangePercentage24H))%")
+                    Text("+\(coin.priceChangePercentage24H.asNumberString())%")
                         .font(.caption)
                         .foregroundStyle(.green)
                 } else {
-                    Text("\(String(format: "%.2f", coin.priceChangePercentage24H))%")
+                    Text("\(coin.priceChangePercentage24H.asNumberString())%")
                         .font(.caption)
                         .foregroundStyle(.red)
                 }

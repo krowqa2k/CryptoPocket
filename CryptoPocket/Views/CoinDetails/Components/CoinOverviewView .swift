@@ -38,7 +38,7 @@ extension CoinOverviewView {
                         .font(.caption)
                         .foregroundStyle(.secondaryTextCP)
                     
-                    Text("$\(String(format: "%.2f", coin.currentPrice))")
+                    Text(coin.currentPrice.asCurrencyWith6Decimals())
                         .foregroundStyle(.textCP)
                     
                     HStack(spacing: 2) {
@@ -56,7 +56,7 @@ extension CoinOverviewView {
                         .font(.caption)
                         .foregroundStyle(.secondaryTextCP)
                     
-                    Text("$\(String(format: "%.2f", coin.marketCap ?? 0))")
+                    Text(coin.marketCap?.formattedWithAbbreviations() ?? "$0.00")
                         .foregroundStyle(.textCP)
                     
                     HStack(spacing: 2) {
@@ -86,7 +86,7 @@ extension CoinOverviewView {
                         .font(.caption)
                         .foregroundStyle(.secondaryTextCP)
                     
-                    Text("$\(String(format: "%.2f", coin.totalVolume))")
+                    Text(coin.totalVolume.formattedWithAbbreviations())
                         .foregroundStyle(.textCP)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -108,7 +108,7 @@ extension CoinOverviewView {
                         .font(.caption)
                         .foregroundStyle(.secondaryTextCP)
                     
-                    Text("$\(String(format: "%.2f", coin.high24H))")
+                    Text(coin.high24H.asCurrencyWith6Decimals())
                         .foregroundStyle(.textCP)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -119,7 +119,7 @@ extension CoinOverviewView {
                         .font(.caption)
                         .foregroundStyle(.secondaryTextCP)
                     
-                    Text("$\(String(format: "%.2f", coin.low24H))")
+                    Text(coin.low24H.asCurrencyWith6Decimals())
                         .foregroundStyle(.textCP)
                     
                 }
@@ -132,7 +132,7 @@ extension CoinOverviewView {
                         .font(.caption)
                         .foregroundStyle(.secondaryTextCP)
                     
-                    Text("$\(String(format: "%.2f", coin.priceChange24H))")
+                    Text(coin.priceChange24H.asCurrencyWith6Decimals())
                         .foregroundStyle(.textCP)
                     
                     HStack(spacing: 2) {
@@ -150,7 +150,7 @@ extension CoinOverviewView {
                         .font(.caption)
                         .foregroundStyle(.secondaryTextCP)
                     
-                    Text("$\(String(format: "%.2f", coin.marketCapChange24H ?? 0))")
+                    Text(coin.marketCapChange24H?.formattedWithAbbreviations() ?? "$0.00")
                         .foregroundStyle(.textCP)
                     
                     HStack(spacing: 2) {
