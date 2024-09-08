@@ -46,23 +46,7 @@ struct HomeView: View {
                     
                     UserBalanceView()
                     
-                    ScrollView(.vertical) {
-                        ForEach(viewModel.topCoins.prefix(15)) { coin in
-                            NavigationLink(destination: CoinDetailsView(coin: coin)
-                                .onAppear(perform: {
-                                    withAnimation(.linear(duration: 0.2)) {
-                                        detailsViewOpened = true
-                                    }
-                                })
-                                .onDisappear(perform: {
-                                    withAnimation(.linear(duration: 0.1)) {
-                                        detailsViewOpened = false
-                                    }
-                                })) {
-                                HomeCoinListCell(coin: coin)
-                            }
-                        }
-                    }
+                    coinList
                 }
                 .task {
                     await viewModel.fetchCoins()
@@ -77,9 +61,40 @@ struct HomeView: View {
             LinearGradient(colors: [Color.backgroundCP, Color.backgroundCP.opacity(0.8), Color.black.opacity(0.3), Color.black.opacity(0.4)], startPoint: .topLeading, endPoint: .bottomTrailing).ignoresSafeArea()
         }
     }
+    
+    private var coinList: some View {
+        VStack {
+            Text("Most Popular Coins")
+                .font(.title2)
+                .fontWeight(.medium)
+                .fontDesign(.rounded)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+            
+            ScrollView(.vertical) {
+                ForEach(viewModel.topCoins.prefix(15)) { coin in
+                    NavigationLink(destination: CoinDetailsView(coin: coin)
+                        .onAppear(perform: {
+                            withAnimation(.linear(duration: 0.2)) {
+                                detailsViewOpened = true
+                            }
+                        })
+                        .onDisappear(perform: {
+                            withAnimation(.linear(duration: 0.1)) {
+                                detailsViewOpened = false
+                            }
+                        })) {
+                        HomeCoinListCell(coin: coin)
+                    }
+                }
+            }
+            .scrollIndicators(.hidden)
+        }
+    }
 }
 
 #Preview {
     HomeView(index: 0, detailsViewOpened: .constant(false))
         .environmentObject(HomeViewModel())
 }
+
