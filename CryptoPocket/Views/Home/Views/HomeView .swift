@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @State var index: Int
+    @Binding var detailsViewOpened: Bool
     @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
@@ -21,13 +22,16 @@ struct HomeView: View {
                 case 0:
                     defaultView
                 case 1:
-                    AllCoinsList()
+                    AllCoinsList(detailsViewOpened: $detailsViewOpened)
                 default:
                     defaultView
                 }
                 
                 Spacer(minLength: 0)
-                TabView(index: $index)
+                if detailsViewOpened == false {
+                    TabView(index: $index)
+                        .transition(.move(edge: .bottom))
+                }
             }
             .ignoresSafeArea(edges: .bottom)
         }
@@ -44,7 +48,17 @@ struct HomeView: View {
                     
                     ScrollView(.vertical) {
                         ForEach(viewModel.topCoins.prefix(15)) { coin in
-                            NavigationLink(destination: CoinDetailsView(coin: coin)) {
+                            NavigationLink(destination: CoinDetailsView(coin: coin)
+                                .onAppear(perform: {
+                                    withAnimation(.linear(duration: 0.2)) {
+                                        detailsViewOpened = true
+                                    }
+                                })
+                                .onDisappear(perform: {
+                                    withAnimation(.linear(duration: 0.1)) {
+                                        detailsViewOpened = false
+                                    }
+                                })) {
                                 HomeCoinListCell(coin: coin)
                             }
                         }
@@ -66,6 +80,6 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(index: 0)
+    HomeView(index: 0, detailsViewOpened: .constant(false))
         .environmentObject(HomeViewModel())
 }

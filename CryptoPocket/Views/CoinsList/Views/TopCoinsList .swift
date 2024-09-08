@@ -12,6 +12,7 @@ struct AllCoinsList: View {
     @ObservedObject private var viewModel = CoinsViewModel()
     @State private var buttonIndex: Int = 0
     @State var searchCoin: String = ""
+    @Binding var detailsViewOpened: Bool
     @State private var refreshTapped: Bool = false
     
     var body: some View {
@@ -61,7 +62,17 @@ struct AllCoinsList: View {
                     
                     ScrollView(.vertical) {
                         ForEach(viewModel.allCoins) { coin in
-                            NavigationLink(destination: CoinDetailsView(coin: coin)) {
+                            NavigationLink(destination: CoinDetailsView(coin: coin)
+                                .onAppear(perform: {
+                                    withAnimation(.linear(duration: 0.2)) {
+                                        detailsViewOpened = true
+                                    }
+                                })
+                                .onDisappear(perform: {
+                                    withAnimation(.linear(duration: 0.1)) {
+                                        detailsViewOpened = false
+                                    }
+                                })) {
                                 CoinListCell(coin: coin)
                                     .padding(.top)
                             }
@@ -148,6 +159,6 @@ struct AllCoinsList: View {
 #Preview {
     ZStack {
         Color.backgroundCP.ignoresSafeArea()
-        AllCoinsList()
+        AllCoinsList(detailsViewOpened: .constant(false))
     }
 }

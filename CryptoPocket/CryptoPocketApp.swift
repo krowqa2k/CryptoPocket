@@ -11,10 +11,11 @@ import SwiftUI
 struct CryptoPocketApp: App {
     
     @StateObject private var viewModel = HomeViewModel()
+    @State private var detailsViewOpened: Bool = false
     
     var body: some Scene {
         WindowGroup {
-            HomeView(index: 0)
+            HomeView(index: 0, detailsViewOpened: $detailsViewOpened)
                 .environmentObject(viewModel)
         }
     }

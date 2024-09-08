@@ -11,6 +11,7 @@ struct CoinDetailsView: View {
     
     @StateObject var viewModel: DetailViewModel
     @State private var isFavorite: Bool = false
+    @State var detailsViewOpened: Bool = true
     @Environment(\.dismiss) var dismiss
     
     init(coin: CoinModel) {
@@ -33,6 +34,7 @@ struct CoinDetailsView: View {
                 }
                 .padding(.top, 20)
             }
+            .scrollIndicators(.hidden)
         }
         .navigationTitle(viewModel.coin.name)
         .navigationBarTitleDisplayMode(.inline)
