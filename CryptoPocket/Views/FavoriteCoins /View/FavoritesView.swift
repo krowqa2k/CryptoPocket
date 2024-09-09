@@ -21,9 +21,8 @@ struct FavoritesView: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    
-                }, label: {
+                
+                NavigationLink(destination: FavoriteCoinsListView()) {
                     HStack {
                         Text("See All")
                         Image(systemName: "list.bullet.clipboard")
@@ -31,7 +30,7 @@ struct FavoritesView: View {
                     .foregroundStyle(.textCP)
                     .font(.subheadline)
                     .underline()
-                })
+                }
             }
             .padding(.horizontal)
             
@@ -44,7 +43,7 @@ struct FavoritesView: View {
             }
             .scrollIndicators(.hidden)
         }
-        .opacity(viewModel.favoriteCoins.isEmpty ? 0 : 1.0)
+        .opacity(viewModel.favoriteCoins.isEmpty ? 1 : 1.0)
     }
 }
 
