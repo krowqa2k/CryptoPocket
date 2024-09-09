@@ -46,6 +46,8 @@ struct HomeView: View {
                     
                     UserBalanceView()
                     
+                    FavoritesView()
+                    
                     coinList
                 }
                 .task {
