@@ -15,8 +15,10 @@ struct CryptoPocketApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeView(index: 0, detailsViewOpened: $detailsViewOpened)
-                .environmentObject(viewModel)
+            NavigationStack {
+                HomeView(index: 0, detailsViewOpened: $detailsViewOpened)
+                    .environmentObject(viewModel)
+            }
         }
     }
 }
