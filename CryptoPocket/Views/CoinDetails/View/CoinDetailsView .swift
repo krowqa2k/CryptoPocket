@@ -10,7 +10,6 @@ import SwiftUI
 struct CoinDetailsView: View {
     
     @StateObject var viewModel: DetailViewModel
-    @State private var isFavorite: Bool = false
     @State var detailsViewOpened: Bool = true
     @Environment(\.dismiss) var dismiss
     
@@ -60,10 +59,11 @@ struct CoinDetailsView: View {
             ImageLoader(imageURL: viewModel.coin.image)
                 .frame(width: 20, height: 20)
             Button(action: {
-                isFavorite.toggle()
+                viewModel.toggleFavorite()
+                viewModel.isFavorite.toggle()
             }, label: {
                 Image(systemName: "heart.fill")
-                    .foregroundStyle(isFavorite ? .red : .secondaryTextCP)
+                    .foregroundStyle(viewModel.isFavorite ? .red : .secondaryTextCP)
             })
         }
     }
