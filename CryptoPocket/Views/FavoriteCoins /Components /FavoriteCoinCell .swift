@@ -20,6 +20,7 @@ struct FavoriteCoinCell: View {
                 
                 coinPriceData
             }
+            .padding(.trailing, 4)
         }
         .padding(2)
         .background(
