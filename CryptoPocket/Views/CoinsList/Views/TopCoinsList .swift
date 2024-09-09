@@ -14,6 +14,7 @@ struct AllCoinsList: View {
     @State var searchCoin: String = ""
     @Binding var detailsViewOpened: Bool
     @State private var refreshTapped: Bool = false
+    @Namespace private var namespace
     
     var body: some View {
         NavigationStack {
@@ -50,7 +51,7 @@ struct AllCoinsList: View {
                                 .foregroundStyle(.textCP)
                                 .background(Color.black.opacity(0.001))
                                 .onTapGesture {
-                                   searchCoin = ""
+                                    searchCoin = ""
                                     Task {
                                         await viewModel.fetchCoins()
                                     }
@@ -58,7 +59,7 @@ struct AllCoinsList: View {
                         }
                     }
                     
-                    filterButtons
+                    filterButtons 
                     
                     ScrollView(.vertical) {
                         ForEach(viewModel.allCoins) { coin in
@@ -68,14 +69,14 @@ struct AllCoinsList: View {
                                         detailsViewOpened = true
                                     }
                                 })
-                                .onDisappear(perform: {
-                                    withAnimation(.linear(duration: 0.1)) {
-                                        detailsViewOpened = false
+                                    .onDisappear(perform: {
+                                        withAnimation(.linear(duration: 0.1)) {
+                                            detailsViewOpened = false
+                                        }
+                                    })) {
+                                        CoinListCell(coin: coin)
+                                            .padding(.top)
                                     }
-                                })) {
-                                CoinListCell(coin: coin)
-                                    .padding(.top)
-                            }
                         }
                     }
                     .scrollIndicators(.hidden)
@@ -84,54 +85,75 @@ struct AllCoinsList: View {
             }
             .task {
                 await viewModel.fetchCoins()
-        }
+            }
         }
     }
     
     private var filterButtons: some View {
         HStack {
             Button(action: {
-                self.buttonIndex = 0
-                viewModel.sortCoins(by: .marketCap)
-            }, label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .frame(width: 60, height: 20)
-                        .foregroundStyle(.secondaryTextCP.opacity(self.buttonIndex == 0 ? 0.5 : 0.0))
-                    Text("Coin")
-                        .foregroundStyle(self.buttonIndex == 0 ? .textCP : .secondaryTextCP)
+                withAnimation(.spring()) {
+                    self.buttonIndex = 0
+                    viewModel.sortCoins(by: .marketCap)
                 }
+            }, label: {
+                Text("Coin")
+                    .foregroundStyle(self.buttonIndex == 0 ? .textCP : .secondaryTextCP)
             })
+            .background(
+                ZStack {
+                    if self.buttonIndex == 0 {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.secondaryTextCP.opacity(0.5))
+                            .matchedGeometryEffect(id: "background", in: namespace)
+                            .frame(width: 60, height: 20)
+                    }
+                }
+            )
             .frame(maxWidth: .infinity, alignment: .leading)
             
             Button(action: {
-                self.buttonIndex = 1
-                viewModel.sortCoins(by: .priceChange)
-            }, label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .frame(width: 120, height: 20)
-                        .foregroundStyle(.secondaryTextCP.opacity(self.buttonIndex == 1 ? 0.5 : 0.0))
-                    Text("Price Change 24h")
-                        .foregroundStyle(self.buttonIndex == 1 ? .textCP : .secondaryTextCP)
+                withAnimation(.spring()) {
+                    self.buttonIndex = 1
+                    viewModel.sortCoins(by: .priceChange)
                 }
+            }, label: {
+                Text("Price Change 24h")
+                    .foregroundStyle(self.buttonIndex == 1 ? .textCP : .secondaryTextCP)
+                    .frame(maxWidth: .infinity)
             })
+            .background(
+                ZStack {
+                    if self.buttonIndex == 1 {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.secondaryTextCP.opacity(0.5))
+                            .matchedGeometryEffect(id: "background", in: namespace)
+                            .frame(width: 120, height: 20)
+                    }
+                }
+            )
             .offset(x: 30)
-            .frame(maxWidth: .infinity)
             
             Button(action: {
-                self.buttonIndex = 2
-                viewModel.sortCoins(by: .price)
-            }, label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .frame(width: 60, height: 20)
-                        .foregroundStyle(.secondaryTextCP.opacity(self.buttonIndex == 2 ? 0.5 : 0.0))
-                    Text("Price")
-                        .foregroundStyle(self.buttonIndex == 2 ? .textCP : .secondaryTextCP)
+                withAnimation(.spring()) {
+                    self.buttonIndex = 2
+                    viewModel.sortCoins(by: .price)
                 }
+            }, label: {
+                Text("Price")
+                    .foregroundStyle(self.buttonIndex == 2 ? .textCP : .secondaryTextCP)
+                    .frame(maxWidth: .infinity)
             })
-            .frame(maxWidth: .infinity)
+            .background(
+                ZStack {
+                    if self.buttonIndex == 2 {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.secondaryTextCP.opacity(0.5))
+                            .matchedGeometryEffect(id: "background", in: namespace)
+                            .frame(width: 60, height: 20)
+                    }
+                }
+            )
             
             Button(action: {
                 Task {
@@ -155,6 +177,7 @@ struct AllCoinsList: View {
         .font(.caption)
     }
 }
+
 
 #Preview {
     ZStack {
