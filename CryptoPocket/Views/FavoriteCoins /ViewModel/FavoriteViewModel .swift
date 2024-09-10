@@ -22,6 +22,10 @@ final class FavoriteViewModel: ObservableObject {
         }
     }
     
+    func removeAllFavorites() {
+        favoriteCoins.removeAll()
+    }
+    
     func isFavorite(coin: CoinModel) -> Bool {
         return favoriteCoins[coin.id] != nil
     }

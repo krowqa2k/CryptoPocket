@@ -14,11 +14,25 @@ struct FavoriteCoinsListView: View {
     var body: some View {
         ZStack {
             Color.backgroundCP.ignoresSafeArea()
-            
-            ScrollView(.vertical) {
-                ForEach(Array(viewModel.favoriteCoins.values)) { coin in
-                    CoinListCell(coin: coin)
-                        .padding(.top)
+            VStack {
+                HStack {
+                    Text("Favorite Coins")
+                        .font(.title)
+                        .fontWeight(.medium)
+                        .foregroundStyle(.textCP)
+                    Spacer()
+                    Button(action: {
+                        viewModel.removeAllFavorites()
+                    }, label: {
+                        Text("Remove all")
+                            .foregroundStyle(.red)
+                    })
+                }
+                ScrollView(.vertical) {
+                    ForEach(Array(viewModel.favoriteCoins.values)) { coin in
+                        CoinListCell(coin: coin)
+                            .padding(.top)
+                    }
                 }
             }
             .padding(.horizontal)
