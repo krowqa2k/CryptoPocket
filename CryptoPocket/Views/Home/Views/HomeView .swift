@@ -72,6 +72,7 @@ struct HomeView: View {
                 .fontDesign(.rounded)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
+                .foregroundStyle(.textCP)
             
             ScrollView(.vertical) {
                 ForEach(viewModel.topCoins.prefix(15)) { coin in
