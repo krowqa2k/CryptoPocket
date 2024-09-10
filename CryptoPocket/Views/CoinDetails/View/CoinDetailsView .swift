@@ -15,6 +15,7 @@ struct CoinDetailsView: View {
     
     init(coin: CoinModel) {
         _viewModel = StateObject(wrappedValue: DetailViewModel(coin: coin))
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.textCP]
     }
     
     var body: some View {
@@ -56,6 +57,7 @@ struct CoinDetailsView: View {
     private var toolbarLeading: some View {
         HStack(spacing: 4) {
             Text(viewModel.coin.symbol.uppercased())
+                .foregroundStyle(.textCP)
             ImageLoader(imageURL: viewModel.coin.image)
                 .frame(width: 20, height: 20)
             Button(action: {
