@@ -43,7 +43,7 @@ struct FavoritesView: View {
             }
             .scrollIndicators(.hidden)
         }
-        .opacity(viewModel.favoriteCoins.isEmpty ? 1 : 1.0)
+        .opacity(viewModel.favoriteCoins.isEmpty ? 0 : 1.0)
     }
 }
 
