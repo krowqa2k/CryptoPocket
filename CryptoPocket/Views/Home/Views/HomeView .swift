@@ -75,7 +75,7 @@ struct HomeView: View {
                 .foregroundStyle(.textCP)
             
             ScrollView(.vertical) {
-                ForEach(viewModel.topCoins.prefix(15)) { coin in
+                ForEach(viewModel.coinsData.prefix(15)) { coin in
                     NavigationLink(destination: CoinDetailsView(coin: coin)
                         .onAppear(perform: {
                             withAnimation(.linear(duration: 0.2)) {
