@@ -10,7 +10,6 @@ import SwiftUI
 struct AddCoinCell: View {
     
     var coin: CoinModel = .mock
-    @State private var isSelected: Bool = false
     
     var body: some View {
         VStack(alignment: .center, spacing: 6) {
@@ -29,18 +28,6 @@ struct AddCoinCell: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 4)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color.backgroundCP)
-                .padding(isSelected ? 1 : -1)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.white)
-                )
-        )
-        .onTapGesture {
-            isSelected.toggle()
-        }
     }
 }
 
