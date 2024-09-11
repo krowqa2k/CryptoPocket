@@ -19,6 +19,7 @@ struct TabView: View {
                 TabViewRectangle()
                     .fill(Gradient(colors: [Color.backgroundCP, Color.black.opacity(0.2)]))
                     .frame(width: width, height: 80)
+                    .cornerRadius(12)
                 
                 HStack {
                     Button(action: {
@@ -60,7 +61,7 @@ struct TabView: View {
                         .foregroundStyle(.textCP)
                 })
             }
-            .offset(y: -10)
+            .offset(y: -30)
         }
     }
 }
