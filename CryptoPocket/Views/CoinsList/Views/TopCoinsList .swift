@@ -20,6 +20,8 @@ struct AllCoinsList: View {
         NavigationStack {
             ZStack {
                 Color.backgroundCP.ignoresSafeArea()
+                LinearGradient(colors: [Color.backgroundCP, Color.backgroundCP.opacity(0.8), Color.black.opacity(0.3), Color.black.opacity(0.4)], startPoint: .topLeading, endPoint: .bottomTrailing).ignoresSafeArea()
+                
                 VStack(alignment: .leading, spacing: 4) {
                     Text("All Coins")
                         .font(.title3)
