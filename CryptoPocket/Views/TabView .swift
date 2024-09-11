@@ -63,6 +63,9 @@ struct TabView: View {
             }
             .offset(y: -30)
         }
+        .sheet(isPresented: $showSheet, content: {
+            AddCoinView()
+        })
     }
 }
 
