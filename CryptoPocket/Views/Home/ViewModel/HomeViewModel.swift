@@ -19,10 +19,7 @@ final class HomeViewModel: ObservableObject {
     }
     
     init() {
-        Task {
-            await fetchCoins()
-            fetchPortfolioFromUserData()
-        }
+        fetchPortfolioFromUserData()
     }
     
     private let coinDataManager = CoinService()
@@ -44,7 +41,6 @@ final class HomeViewModel: ObservableObject {
     
     func fetchPortfolioFromUserData() {
         userHoldings = userPortfolioDataManager.convertToUserPortfolioModel()
-        print(userHoldings)
     }
     
     func fetchCoins() async {
