@@ -52,6 +52,7 @@ struct HomeView: View {
                 }
                 .task {
                     await viewModel.fetchCoins()
+                    viewModel.fetchPortfolioFromUserData()
                 }
             }
         }
