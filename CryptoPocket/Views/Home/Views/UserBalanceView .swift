@@ -10,40 +10,46 @@ import SwiftUI
 struct UserBalanceView: View {
     
     @State private var isProfit: Bool = true
+    @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            HStack {
-                Text("Your Balance")
-                    .font(.system(size: 18))
-                    .fontWeight(.medium)
-                    .foregroundStyle(.secondaryTextCP)
+        HStack {
+            VStack(alignment: .leading, spacing: 24) {
+                HStack {
+                    Text("Your Balance")
+                        .font(.system(size: 18))
+                        .fontWeight(.medium)
+                        .foregroundStyle(.secondaryTextCP)
+                    
+                    Text("+37,2%")
+                        .font(.callout)
+                        .foregroundStyle(.black)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .foregroundStyle(isProfit ? .green : .red)
+                        )
+                        .opacity(viewModel.totalUserHoldings.isZero ? 0 : 1)
+                }
                 
-                Text("+37,2%")
-                    .font(.callout)
-                    .foregroundStyle(.black)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .foregroundStyle(isProfit ? .green : .red)
-                    )
+                Text(viewModel.totalUserHoldings.asCurrencyWith2Decimals())
+                    .font(.system(size: 45))
+                    .fontWeight(.medium)
+                    .foregroundStyle(.textCP)
+                    .fontDesign(.rounded)
             }
-            
-            Text("$17258.13")
-                .font(.system(size: 45))
-                .fontWeight(.medium)
-                .foregroundStyle(.textCP)
-                .fontDesign(.rounded)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundStyle(.ultraThinMaterial.opacity(0.5))
+            )
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .foregroundStyle(.ultraThinMaterial.opacity(0.5))
-        )
         .padding(.horizontal)
-        
+        .task {
+            viewModel.fetchPortfolioFromUserData()
+        }
     }
 }
 
@@ -51,5 +57,6 @@ struct UserBalanceView: View {
     ZStack {
         Color.backgroundCP.ignoresSafeArea()
         UserBalanceView()
+            .environmentObject(HomeViewModel())
     }
 }
