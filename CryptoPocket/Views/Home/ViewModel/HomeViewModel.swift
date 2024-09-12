@@ -11,7 +11,22 @@ import Foundation
 final class HomeViewModel: ObservableObject {
     
     @Published private(set) var coinsData: [CoinModel] = []
+    @Published private(set) var userHoldings: [UserPortfolioModel] = []
     @Published var isLoading: Bool = false
+    
+    var totalUserHoldings: Double {
+        userHoldings.reduce(0) { $0 + $1.currentHoldingsValue }
+    }
+    
+    init() {
+        Task {
+            await fetchCoins()
+            fetchPortfolioFromUserData()
+        }
+    }
+    
+    private let coinDataManager = CoinService()
+    private let userPortfolioDataManager = UserPortfolioDataService()
     
     func filterCoin(search: String) {
         if !search.isEmpty {
@@ -22,16 +37,22 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
-    let coinDataManager = CoinService()
+    func updateUserPortfolio(coin: CoinModel, amount: Double) {
+        userPortfolioDataManager.updateUserPortfolio(coin: coin, amount: amount)
+        fetchPortfolioFromUserData()
+    }
+    
+    func fetchPortfolioFromUserData() {
+        userHoldings = userPortfolioDataManager.convertToUserPortfolioModel()
+        print(userHoldings)
+    }
     
     func fetchCoins() async {
         isLoading = true
         
         do {
             let coinData = try await coinDataManager.getCoinData()
-            
             self.coinsData = coinData
-            
         } catch {
             print("Failed to fetch coins \(error)")
         }

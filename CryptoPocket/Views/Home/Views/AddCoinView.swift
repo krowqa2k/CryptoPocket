@@ -147,9 +147,12 @@ struct AddCoinView: View {
             if !amountText.isEmpty {
                 withAnimation(.easeInOut) {
                     Button(action: {
+                        if let selectedCoin = selectedCoin, let amount = Double(amountText), amount > 0 {
+                                viewModel.updateUserPortfolio(coin: selectedCoin, amount: amount)
+                                amountText = ""
+                                searchCoin = ""
+                            }
                         selectedCoin = nil
-                        amountText = ""
-                        searchCoin = ""
                     }, label: {
                         Text("Save")
                             .font(.title2)
