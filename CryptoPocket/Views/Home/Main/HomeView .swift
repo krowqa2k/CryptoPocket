@@ -50,6 +50,9 @@ struct HomeView: View {
                     
                     coinList
                 }
+                .task {
+                    await viewModel.fetchCoinsAndUpdatePortfolio()
+                }
             }
         }
     }
