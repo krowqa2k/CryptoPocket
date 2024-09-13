@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct UserBalanceView: View {
-    
-    @State private var isProfit: Bool = true
     @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
@@ -21,16 +19,30 @@ struct UserBalanceView: View {
                         .fontWeight(.medium)
                         .foregroundStyle(.secondaryTextCP)
                     
-                    Text("+37,2%")
+                    Text("\(viewModel.portfolioChange24h.asNumberString())%")
                         .font(.callout)
                         .foregroundStyle(.black)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
-                                .foregroundStyle(isProfit ? .green : .red)
+                                .foregroundStyle(viewModel.portfolioChange24h >= 0 ? .green : .red)
                         )
                         .opacity(viewModel.totalUserHoldings.isZero ? 0 : 1)
+                    
+                    NavigationLink(destination: {
+                        UserPortfolioView()
+                            .environmentObject(HomeViewModel())
+                    }, label: {
+                        HStack(spacing: 2) {
+                            Text("See")
+                            Image(systemName: "person.crop.circle")
+                                .font(.headline)
+                        }
+                    })
+                    .foregroundStyle(.textCP)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .opacity(viewModel.totalUserHoldings.isZero ? 0 : 1)
                 }
                 
                 Text(viewModel.totalUserHoldings.asCurrencyWith2Decimals())
@@ -47,16 +59,5 @@ struct UserBalanceView: View {
             )
         }
         .padding(.horizontal)
-        .task {
-            viewModel.fetchPortfolioFromUserData()
-        }
-    }
-}
-
-#Preview {
-    ZStack {
-        Color.backgroundCP.ignoresSafeArea()
-        UserBalanceView()
-            .environmentObject(HomeViewModel())
     }
 }
