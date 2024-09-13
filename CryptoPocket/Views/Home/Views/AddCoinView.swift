@@ -40,7 +40,7 @@ struct AddCoinView: View {
             .padding()
         }
         .task {
-            await viewModel.fetchCoins()
+            await viewModel.fetchCoinsAndUpdatePortfolio()
         }
     }
     
@@ -92,7 +92,7 @@ struct AddCoinView: View {
                         searchCoin = ""
                         selectedCoin = nil
                         Task {
-                            await viewModel.fetchCoins()
+                            await viewModel.fetchCoinsAndUpdatePortfolio()
                         }
                     }
             }
