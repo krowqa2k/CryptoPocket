@@ -131,6 +131,9 @@ struct AddCoinView: View {
                         TextField("Ex: 2.4", text: $amountText)
                             .multilineTextAlignment(.trailing)
                             .keyboardType(.decimalPad)
+                            .onChange(of: amountText, { oldValue, newValue in
+                                amountText = newValue.replacingOccurrences(of: ",", with: ".")
+                            })
                     }
                     
                     HStack {
