@@ -62,10 +62,9 @@ struct CoinDetailsView: View {
                 .frame(width: 20, height: 20)
             Button(action: {
                 viewModel.toggleFavorite()
-                viewModel.isFavorite.toggle()
             }, label: {
                 Image(systemName: "heart.fill")
-                    .foregroundStyle(viewModel.isFavorite ? .red : .secondaryTextCP)
+                    .foregroundStyle(FavoriteViewModel.shared.isFavorite(coin: viewModel.coin) ? .red : .secondaryTextCP)
             })
         }
     }

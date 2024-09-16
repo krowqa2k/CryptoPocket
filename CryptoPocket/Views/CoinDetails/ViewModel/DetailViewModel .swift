@@ -16,9 +16,15 @@ final class DetailViewModel: ObservableObject {
     
     init(coin: CoinModel) {
         self.coin = coin
+        updateFavoriteStatus()
     }
     
     func toggleFavorite() {
         favoritesData.toggleFavorite(coin: coin)
+        updateFavoriteStatus()
+    }
+    
+    func updateFavoriteStatus() {
+        isFavorite = favoritesData.isFavorite(coin: coin)
     }
 }
