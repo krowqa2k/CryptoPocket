@@ -101,6 +101,7 @@ struct AllCoinsList: View {
             }, label: {
                 Text("Coin")
                     .foregroundStyle(self.buttonIndex == 0 ? .textCP : .secondaryTextCP)
+                    .font(.system(size: 10))
             })
             .background(
                 ZStack {
@@ -120,9 +121,10 @@ struct AllCoinsList: View {
                     viewModel.sortCoins(by: .priceChange)
                 }
             }, label: {
-                Text("Price Change 24h")
+                Text("Price-24h")
                     .foregroundStyle(self.buttonIndex == 1 ? .textCP : .secondaryTextCP)
                     .frame(maxWidth: .infinity)
+                    .font(.system(size: 10))
             })
             .background(
                 ZStack {
@@ -130,7 +132,7 @@ struct AllCoinsList: View {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color.secondaryTextCP.opacity(0.5))
                             .matchedGeometryEffect(id: "background", in: namespace)
-                            .frame(width: 120, height: 20)
+                            .frame(width: 60, height: 20)
                     }
                 }
             )
@@ -145,6 +147,7 @@ struct AllCoinsList: View {
                 Text("Price")
                     .foregroundStyle(self.buttonIndex == 2 ? .textCP : .secondaryTextCP)
                     .frame(maxWidth: .infinity)
+                    .font(.system(size: 10))
             })
             .background(
                 ZStack {
