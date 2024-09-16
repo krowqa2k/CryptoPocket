@@ -37,7 +37,12 @@ struct FavoritesView: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(Array(viewModel.favoriteCoins.values)) { coin in
-                        FavoriteCoinCell(coin: coin)
+                        NavigationLink {
+                            CoinDetailsView(coin: coin)
+                        } label: {
+                            FavoriteCoinCell(coin: coin)
+                        }
+
                     }
                 }
             }

@@ -30,8 +30,12 @@ struct FavoriteCoinsListView: View {
                 }
                 ScrollView(.vertical) {
                     ForEach(Array(viewModel.favoriteCoins.values)) { coin in
-                        CoinListCell(coin: coin)
-                            .padding(.top)
+                        NavigationLink {
+                            CoinDetailsView(coin: coin)
+                        } label: {
+                            CoinListCell(coin: coin)
+                                .padding(.top)
+                        }
                     }
                 }
             }
