@@ -17,16 +17,17 @@ struct PortfolioListCell_: View {
                 .frame(width: 40, height: 40)
             
             Text(portfolioCoin.symbol.uppercased())
-                .font(.largeTitle)
+                .font(.title)
                 .fontWeight(.medium)
             
             Spacer()
             
-            HStack(spacing: 36) {
+            HStack(spacing: 4) {
                 Text(portfolioCoin.currentHoldings?.asNumberString() ?? "0.00")
+                    .frame(width: 60, alignment: .center)
                 Text(portfolioCoin.currentHoldingsValue.asCurrencyWith2Decimals())
+                    .frame(width: 100, alignment: .trailing)
             }
-            .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .foregroundStyle(.textCP)
         .padding(12)

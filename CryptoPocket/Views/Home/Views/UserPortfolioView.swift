@@ -21,15 +21,15 @@ struct UserPortfolioView: View {
                             .fontWeight(.medium)
                             .foregroundStyle(.secondaryTextCP)
                         
-                        HStack {
+                        HStack(spacing: 20) {
                             Text(viewModel.totalUserHoldings.asCurrencyWith2Decimals())
-                                .font(.system(size: 45))
+                                .font(.system(size: 40))
                                 .fontWeight(.medium)
                                 .foregroundStyle(.textCP)
                                 .fontDesign(.rounded)
                             
-                            Text("\(viewModel.portfolioChange24h.asNumberString())% 24h")
-                                .font(.headline)
+                            Text("\(viewModel.portfolioChange24h.asNumberString())% 24H")
+                                .font(.subheadline)
                                 .foregroundStyle(viewModel.portfolioChange24h >= 0 ? .green : .red)
                         }
                     }
@@ -43,7 +43,7 @@ struct UserPortfolioView: View {
                 .padding(.horizontal)
                 
                 VStack {
-                    HStack(spacing: 44) {
+                    HStack(spacing: 60) {
                         Text("Coin")
                         Spacer()
                         Text("Holdings")

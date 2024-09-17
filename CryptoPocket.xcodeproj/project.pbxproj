@@ -202,7 +202,6 @@
 				C12B072B2C84EAA1001CCD61 /* Const */,
 				C1D043762C81F90700CE1332 /* Model */,
 				C1D043752C81F90200CE1332 /* Services */,
-				C1D043742C81F8F400CE1332 /* Managers */,
 				C1D0436E2C81F7E100CE1332 /* Views */,
 				C1CC52222C80E1F10060E47A /* CryptoPocketApp.swift */,
 				C1CC52262C80E1F20060E47A /* Assets.xcassets */,
@@ -277,13 +276,6 @@
 				C12B07342C84EB75001CCD61 /* CoinListCell .swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		C1D043742C81F8F400CE1332 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
 		C1D043752C81F90200CE1332 /* Services */ = {
