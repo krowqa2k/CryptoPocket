@@ -10,6 +10,7 @@ import SwiftUI
 struct HeaderView: View {
     
     @State private var showSheet: Bool = false
+    @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
         VStack {
@@ -30,9 +31,20 @@ struct HeaderView: View {
                     .font(.headline)
                     .fontWeight(.medium)
                     .fontDesign(.rounded)
-                    .offset(x: -20)
                 
                 Spacer()
+                
+                Button(action: {
+                    Task {
+                        await viewModel.fetchCoinsAndUpdatePortfolio()
+                    }
+                }, label: {
+                    withAnimation {
+                        Image(systemName: "bitcoinsign.arrow.circlepath")
+                            .font(.title2)
+                            .foregroundStyle(.green)
+                    }
+                })
             }
             .padding(.horizontal)
             
@@ -53,5 +65,6 @@ struct HeaderView: View {
     ZStack {
         Color.backgroundCP.ignoresSafeArea()
         HeaderView()
+            .environmentObject(HomeViewModel())
     }
 }
