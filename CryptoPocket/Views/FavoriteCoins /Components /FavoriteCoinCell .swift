@@ -67,26 +67,16 @@ struct FavoriteCoinCell: View {
             .foregroundStyle(.textCP)
             .fontWeight(.medium)
             .font(.callout)
-            
-            if coin.priceChangePercentage24H > 0 {
-                Group{
-                    Text("+")
-                    +
-                    Text(String(format: "%.2f", coin.priceChangePercentage24H))
-                    +
-                    Text("%")
-                }
-                .font(.system(size: 12))
-                .foregroundStyle(.green)
-            } else {
-                Group {
-                    Text(String(format: "%.2f", coin.priceChangePercentage24H))
-                    +
-                    Text("%")
-                }
-                .font(.system(size: 12))
-                .foregroundStyle(.red)
+    
+            Group{
+                Text(coin.priceChangePercentage24H > 0 ? "+" : "")
+                +
+                Text(String(format: "%.2f", coin.priceChangePercentage24H))
+                +
+                Text("%")
             }
+            .font(.system(size: 12))
+            .foregroundStyle(coin.priceChangePercentage24H > 0 ? .green : .red)
         }
         .padding(.trailing, 6)
     }
