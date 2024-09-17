@@ -33,6 +33,8 @@
 		C1A252E02C9337DB00C4FB8D /* UserPortfolioModel .swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A252DF2C9337DB00C4FB8D /* UserPortfolioModel .swift */; };
 		C1B6597C2C8A0F5600DB940E /* LineChartView .swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B6597B2C8A0F5600DB940E /* LineChartView .swift */; };
 		C1B6597F2C8A1E6F00DB940E /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B6597E2C8A1E6F00DB940E /* Date.swift */; };
+		C1B823CC2C99BD04005146B3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C1B823CB2C99BD04005146B3 /* Lottie */; };
+		C1B823CE2C99BD24005146B3 /* SplashLaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B823CD2C99BD24005146B3 /* SplashLaunchScreen.swift */; };
 		C1B9041B2C8B5BF200F5EF08 /* CoinDetailsView .swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B9041A2C8B5BF200F5EF08 /* CoinDetailsView .swift */; };
 		C1B9041F2C8B677400F5EF08 /* HomeCoinListCell .swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B9041E2C8B677400F5EF08 /* HomeCoinListCell .swift */; };
 		C1CC52232C80E1F10060E47A /* CryptoPocketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CC52222C80E1F10060E47A /* CryptoPocketApp.swift */; };
@@ -72,6 +74,7 @@
 		C1A252DF2C9337DB00C4FB8D /* UserPortfolioModel .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserPortfolioModel .swift"; sourceTree = "<group>"; };
 		C1B6597B2C8A0F5600DB940E /* LineChartView .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LineChartView .swift"; sourceTree = "<group>"; };
 		C1B6597E2C8A1E6F00DB940E /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		C1B823CD2C99BD24005146B3 /* SplashLaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashLaunchScreen.swift; sourceTree = "<group>"; };
 		C1B9041A2C8B5BF200F5EF08 /* CoinDetailsView .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoinDetailsView .swift"; sourceTree = "<group>"; };
 		C1B9041E2C8B677400F5EF08 /* HomeCoinListCell .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeCoinListCell .swift"; sourceTree = "<group>"; };
 		C1CC521F2C80E1F10060E47A /* CryptoPocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoPocket.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +94,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C12B072F2C84EABE001CCD61 /* SDWebImageSwiftUI in Frameworks */,
+				C1B823CC2C99BD04005146B3 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +228,7 @@
 				C1D043712C81F7FE00CE1332 /* Info */,
 				C1D043702C81F7EF00CE1332 /* CoinsList */,
 				C1D0436F2C81F7E700CE1332 /* Home */,
+				C1B823CD2C99BD24005146B3 /* SplashLaunchScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 			name = CryptoPocket;
 			packageProductDependencies = (
 				C12B072E2C84EABE001CCD61 /* SDWebImageSwiftUI */,
+				C1B823CB2C99BD04005146B3 /* Lottie */,
 			);
 			productName = CryptoPocket;
 			productReference = C1CC521F2C80E1F10060E47A /* CryptoPocket.app */;
@@ -413,6 +419,7 @@
 			mainGroup = C1CC52162C80E1F10060E47A;
 			packageReferences = (
 				C12B072D2C84EABE001CCD61 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				C1B823CA2C99BD04005146B3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = C1CC52202C80E1F10060E47A /* Products */;
 			projectDirPath = "";
@@ -457,6 +464,7 @@
 				C1591ECC2C85FDCA007BA558 /* TabView .swift in Sources */,
 				C16D08DF2C8DDE7C00745D51 /* AppInfo .swift in Sources */,
 				C15BF9882C94860500DF6ACB /* UserPortfolioCell .swift in Sources */,
+				C1B823CE2C99BD24005146B3 /* SplashLaunchScreen.swift in Sources */,
 				C1CC52232C80E1F10060E47A /* CryptoPocketApp.swift in Sources */,
 				C1B9041B2C8B5BF200F5EF08 /* CoinDetailsView .swift in Sources */,
 				C1B6597F2C8A1E6F00DB940E /* Date.swift in Sources */,
@@ -690,6 +698,14 @@
 				minimumVersion = 3.1.2;
 			};
 		};
+		C1B823CA2C99BD04005146B3 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -697,6 +713,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C12B072D2C84EABE001CCD61 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		C1B823CB2C99BD04005146B3 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1B823CA2C99BD04005146B3 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 

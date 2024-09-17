@@ -12,9 +12,16 @@ struct HomeView: View {
     @State var index: Int
     @Binding var detailsViewOpened: Bool
     @EnvironmentObject var viewModel: HomeViewModel
+    @State private var isShowingSplashScreen = true
     
     var body: some View {
         ZStack {
+            if isShowingSplashScreen {
+                SplashLaunchScreen()
+                    .transition(.opacity)
+                    .zIndex(1)
+            }
+            
             background
             
             VStack {
@@ -34,6 +41,15 @@ struct HomeView: View {
                 }
             }
             .ignoresSafeArea(edges: .bottom)
+            .opacity(isShowingSplashScreen ? 0 : 1)
+            .animation(.easeIn(duration: 0.4), value: isShowingSplashScreen)
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                withAnimation {
+                    isShowingSplashScreen = false
+                }
+            }
         }
     }
     
