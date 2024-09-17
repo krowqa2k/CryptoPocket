@@ -136,7 +136,7 @@ struct AllCoinsList: View {
                     }
                 }
             )
-            .offset(x: 30)
+            .offset(x: 50)
             
             Button(action: {
                 withAnimation(.spring()) {
@@ -159,6 +159,7 @@ struct AllCoinsList: View {
                     }
                 }
             )
+            .offset(x: 20)
             
             Button(action: {
                 Task {
@@ -178,7 +179,7 @@ struct AllCoinsList: View {
             .offset(x: 10)
         }
         .padding(.top, 8)
-        .padding(.horizontal, 4)
+        .padding(.horizontal, 16)
         .font(.caption)
     }
 }

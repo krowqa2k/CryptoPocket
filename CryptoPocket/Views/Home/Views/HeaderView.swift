@@ -25,7 +25,7 @@ struct HeaderView: View {
                 
                 Spacer()
                 
-                Text("Crypto Wallet")
+                Text("Crypto Pocket")
                     .foregroundStyle(.textCP)
                     .font(.headline)
                     .fontWeight(.medium)
