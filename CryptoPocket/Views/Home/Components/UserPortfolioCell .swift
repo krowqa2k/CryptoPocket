@@ -22,9 +22,11 @@ struct PortfolioListCell_: View {
             
             Spacer()
             
-            HStack {
+            HStack(spacing: 36) {
+                Text(portfolioCoin.currentHoldings?.asNumberString() ?? "0.00")
                 Text(portfolioCoin.currentHoldingsValue.asCurrencyWith2Decimals())
             }
+            .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .foregroundStyle(.textCP)
         .padding(12)
@@ -36,6 +38,9 @@ struct PortfolioListCell_: View {
 }
 
 #Preview {
-    PortfolioListCell_()
+    ZStack {
+        Color.backgroundCP.ignoresSafeArea()
+        PortfolioListCell_()
+    }
 }
 

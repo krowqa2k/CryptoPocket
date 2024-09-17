@@ -28,7 +28,7 @@ struct UserPortfolioView: View {
                                 .foregroundStyle(.textCP)
                                 .fontDesign(.rounded)
                             
-                            Text("\(viewModel.portfolioChange24h.asNumberString())%")
+                            Text("\(viewModel.portfolioChange24h.asNumberString())% 24h")
                                 .font(.headline)
                                 .foregroundStyle(viewModel.portfolioChange24h >= 0 ? .green : .red)
                         }
@@ -43,10 +43,11 @@ struct UserPortfolioView: View {
                 .padding(.horizontal)
                 
                 VStack {
-                    HStack {
+                    HStack(spacing: 44) {
                         Text("Coin")
                         Spacer()
-                        Text("Your holdings")
+                        Text("Holdings")
+                        Text("Live Price")
                     }
                     .font(.caption)
                     .foregroundStyle(.secondaryTextCP)
