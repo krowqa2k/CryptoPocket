@@ -32,7 +32,7 @@ struct UserBalanceView: View {
                     
                     NavigationLink(destination: {
                         UserPortfolioView()
-                            .environmentObject(HomeViewModel())
+                            .environmentObject(viewModel)
                     }, label: {
                         HStack(spacing: 2) {
                             Text("See")
@@ -60,4 +60,9 @@ struct UserBalanceView: View {
         }
         .padding(.horizontal)
     }
+}
+
+#Preview {
+    UserBalanceView()
+        .environmentObject(HomeViewModel())
 }
