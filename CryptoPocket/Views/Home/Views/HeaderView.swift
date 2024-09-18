@@ -10,6 +10,7 @@ import SwiftUI
 struct HeaderView: View {
     
     @State private var showSheet: Bool = false
+    @State private var refreshClicked: Bool = false
     @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
@@ -34,17 +35,31 @@ struct HeaderView: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    Task {
-                        await viewModel.fetchCoinsAndUpdatePortfolio()
-                    }
-                }, label: {
-                    withAnimation {
-                        Image(systemName: "bitcoinsign.arrow.circlepath")
-                            .font(.title2)
-                            .foregroundStyle(.green)
-                    }
-                })
+                if #available(iOS 18.0, *) {
+                    Image(systemName: "bitcoinsign.arrow.trianglehead.counterclockwise.rotate.90")
+                        .font(.title2)
+                        .foregroundStyle(.green)
+                        .onTapGesture {
+                            refreshClicked.toggle()
+                            Task {
+                                await viewModel.fetchCoinsAndUpdatePortfolio()
+                            }
+                        }
+                        .symbolEffect(.rotate, value: refreshClicked)
+                } else {
+                    Button(action: {
+                        Task {
+                            await viewModel.fetchCoinsAndUpdatePortfolio()
+                        }
+                    }, label: {
+                        withAnimation {
+                            Image(systemName: "bitcoinsign.arrow.circlepath")
+                                .font(.title2)
+                                .foregroundStyle(.green)
+                        }
+                    })
+                }
+
             }
             .padding(.horizontal)
             

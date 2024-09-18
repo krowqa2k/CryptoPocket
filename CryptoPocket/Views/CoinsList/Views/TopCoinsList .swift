@@ -161,22 +161,39 @@ struct AllCoinsList: View {
             )
             .offset(x: 20)
             
-            Button(action: {
-                Task {
-                    await viewModel.fetchCoins()
-                }
-                refreshTapped.toggle()
-                buttonIndex = 0
-            }, label: {
-                withAnimation {
-                    Image(systemName: "arrow.uturn.forward")
-                        .font(.system(size: 15))
-                        .foregroundStyle(.secondaryTextCP)
-                        .rotationEffect(.degrees(refreshTapped ? 360 : 0))
-                        .animation(.smooth(duration: 1), value: refreshTapped)
-                }
-            })
-            .offset(x: 10)
+            if #available(iOS 18.0, *) {
+                Image(systemName: "bitcoinsign.arrow.trianglehead.counterclockwise.rotate.90")
+                    .font(.title3)
+                    .foregroundStyle(.green)
+                    .onTapGesture {
+                        refreshTapped.toggle()
+                        Task {
+                            await viewModel.fetchCoins()
+                        }
+                        buttonIndex = 0
+                    }
+                    .symbolEffect(.rotate, value: refreshTapped)
+                    .offset(x: 10)
+                
+            } else {
+                Button(action: {
+                    Task {
+                        await viewModel.fetchCoins()
+                    }
+                    refreshTapped.toggle()
+                    buttonIndex = 0
+                }, label: {
+                    withAnimation {
+                        Image(systemName: "arrow.uturn.forward")
+                            .font(.system(size: 15))
+                            .foregroundStyle(.secondaryTextCP)
+                            .rotationEffect(.degrees(refreshTapped ? 360 : 0))
+                            .animation(.smooth(duration: 1), value: refreshTapped)
+                    }
+                })
+                .offset(x: 10)
+            }
+            
         }
         .padding(.top, 8)
         .padding(.horizontal, 16)
