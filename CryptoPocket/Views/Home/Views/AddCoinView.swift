@@ -39,9 +39,6 @@ struct AddCoinView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
         }
-        .task {
-            await viewModel.fetchCoinsAndUpdatePortfolio()
-        }
     }
     
     private var dismissButton: some View {
