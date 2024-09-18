@@ -74,6 +74,17 @@ final class HomeViewModel: ObservableObject {
         userPortfolioDataManager.updateUserPortfolio(coin: coin, amount: amount)
         Task {
             await fetchCoinsAndUpdatePortfolio()
+            fetchPortfolioFromUserData()
+        }
+    }
+    
+    func removeCoin(coin: UserPortfolioModel) {
+        if let entity = userPortfolioDataManager.savedEntities.first(where: { $0.coinID == coin.id }) {
+            userPortfolioDataManager.removeCoin(entity: entity)
+        }
+        Task {
+            await fetchCoinsAndUpdatePortfolio()
+            fetchPortfolioFromUserData()
         }
     }
 

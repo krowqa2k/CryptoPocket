@@ -65,7 +65,7 @@ final class UserPortfolioDataService {
         applyChanges()
     }
     
-    private func removeCoin(entity: PortfolioEntity) {
+    func removeCoin(entity: PortfolioEntity) {
         container.viewContext.delete(entity)
         applyChanges()
     }
