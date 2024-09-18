@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 final class DetailViewModel: ObservableObject {
     @Published var coin: CoinModel
     @Published var isFavorite: Bool = false

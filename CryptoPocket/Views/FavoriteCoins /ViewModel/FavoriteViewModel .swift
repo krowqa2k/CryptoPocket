@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class FavoriteViewModel: ObservableObject {
     
     static let shared = FavoriteViewModel()
@@ -19,10 +20,29 @@ final class FavoriteViewModel: ObservableObject {
     
     private let userDefaults = UserDefaults.standard
     private let favoritesKey = "FavoriteCoins"
+    private let coinService = CoinService()
+    
     
     private init() {
         loadFavorites()
+        Task {
+            await updateFavoriteCoinPrices()
+        }
     }
+    
+    func updateFavoriteCoinPrices() async {
+        do {
+            let updatedCoins = try await coinService.getCoinData()
+            for (key, _) in favoriteCoins {
+                if let updatedCoin = updatedCoins.first(where: { $0.id == key }) {
+                    favoriteCoins[key] = updatedCoin
+                }
+            }
+        } catch {
+            print("Failed to update favorite coin prices: \(error)")
+        }
+    }
+
     
     func toggleFavorite(coin: CoinModel) {
         if favoriteCoins[coin.id] != nil {
