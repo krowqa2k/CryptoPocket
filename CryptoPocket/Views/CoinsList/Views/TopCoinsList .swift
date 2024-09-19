@@ -163,7 +163,7 @@ struct AllCoinsList: View {
             
             if #available(iOS 18.0, *) {
                 Image(systemName: "bitcoinsign.arrow.trianglehead.counterclockwise.rotate.90")
-                    .font(.title3)
+                    .font(.title2)
                     .foregroundStyle(.green)
                     .onTapGesture {
                         refreshTapped.toggle()
