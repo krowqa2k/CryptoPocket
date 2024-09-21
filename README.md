@@ -24,13 +24,13 @@ Xcode 15.4 (mostly) and Xcode 16, Coingecko free api.
 
 App Demo 🎥: 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/f8f49400-aaeb-4efa-a64e-ee23bdc0ff6e" alt="Screenshot 1" width="200"/>
-  <img src="https://github.com/user-attachments/assets/3c42af30-610a-48a4-ba93-e691a8fb8d64" alt="Screenshot 2" width="200"/>
-  <img src="https://github.com/user-attachments/assets/45f0cb83-5638-49c8-b1cf-b8d3133e5562" alt="Screenshot 3" width="200"/>
-  <img src="https://github.com/user-attachments/assets/53158b91-1cab-406d-a354-f187b9314d96" alt="Screenshot 4" width="200"/>
-  <img src="https://github.com/user-attachments/assets/66d7cb38-f1d7-492a-9027-293cac6a7422" alt="Screenshot 5" width="200"/>
-  <img src="https://github.com/user-attachments/assets/5508abae-8a02-4e46-9712-00fe18254fee" alt="Screenshot 6" width="200"/>
-  <img src="https://github.com/user-attachments/assets/53982b83-9acc-414d-a33d-e3aaa444db36" alt="Screenshot 7" width="200"/>
-  <img src="https://github.com/user-attachments/assets/53d71a3f-12df-4e1f-964e-46440e24fdbd" alt="Screenshot 8" width="200"/>
+  <img src="https://github.com/user-attachments/assets/53d71a3f-12df-4e1f-964e-46440e24fdbd" alt="Screenshot 8" width="250"/>
+  <img src="https://github.com/user-attachments/assets/3c42af30-610a-48a4-ba93-e691a8fb8d64" alt="Screenshot 2" width="250"/>
+  <img src="https://github.com/user-attachments/assets/45f0cb83-5638-49c8-b1cf-b8d3133e5562" alt="Screenshot 3" width="250"/>
+  <img src="https://github.com/user-attachments/assets/f8f49400-aaeb-4efa-a64e-ee23bdc0ff6e" alt="Screenshot 1" width="250"/>
+  <img src="https://github.com/user-attachments/assets/53158b91-1cab-406d-a354-f187b9314d96" alt="Screenshot 4" width="250"/>
+  <img src="https://github.com/user-attachments/assets/66d7cb38-f1d7-492a-9027-293cac6a7422" alt="Screenshot 5" width="250"/>
+  <img src="https://github.com/user-attachments/assets/5508abae-8a02-4e46-9712-00fe18254fee" alt="Screenshot 6" width="250"/>
+  <img src="https://github.com/user-attachments/assets/53982b83-9acc-414d-a33d-e3aaa444db36" alt="Screenshot 7" width="250"/>
 </div>
 
