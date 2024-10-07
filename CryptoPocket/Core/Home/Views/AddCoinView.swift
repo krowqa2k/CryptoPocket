@@ -14,31 +14,40 @@ struct AddCoinView: View {
     @State private var selectedCoin: CoinModel? = nil
     @State private var amountText: String = ""
     @State private var searchCoin: String = ""
+    @State private var showBottomSheet: Bool = false
+    let columns = Array(repeating: GridItem(.flexible()), count: 4)
     
     var body: some View {
-        ZStack {
-            Color.backgroundCP.ignoresSafeArea()
-            
-            VStack(spacing: 24) {
-                HStack {
-                    Text("Add Coin To Portfolio")
-                        .font(.title)
-                        .foregroundStyle(.textCP)
+        VStack {
+            VStack {
+                VStack(spacing: 24) {
+                    HStack {
+                        Text("Add Coin To Portfolio")
+                            .font(.title)
+                            .foregroundStyle(.textCP)
+                        
+                        Spacer(minLength: 0)
+                        
+                        dismissButton
+                    }
                     
-                    Spacer(minLength: 0)
-                    
-                    dismissButton
+                    searchBar
                 }
+                .padding()
                 
-                searchBar
-                
-                coinAddPortfolio
-                
-                Spacer()
+                ScrollView(.vertical) {
+                    coinAddPortfolio
+                }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
+            .background(Color.backgroundCP.ignoresSafeArea())
+            
+            if showBottomSheet {
+                bottomSheet
+                    .transition(.move(edge: .bottom))
+                    .animation(.easeInOut, value: showBottomSheet)
+            }
         }
+        .background(Color.backgroundCP.ignoresSafeArea())
     }
     
     private var dismissButton: some View {
@@ -88,6 +97,7 @@ struct AddCoinView: View {
                     .onTapGesture {
                         searchCoin = ""
                         selectedCoin = nil
+                        showBottomSheet = false
                         Task {
                             await viewModel.fetchCoinsAndUpdatePortfolio()
                         }
@@ -98,22 +108,22 @@ struct AddCoinView: View {
     }
     
     private var coinAddPortfolio: some View {
-        VStack(spacing: 12) {
-            ScrollView(.horizontal) {
-                HStack(spacing: 12) {
-                    ForEach(viewModel.coinsData){ coin in
-                        AddCoinCell(coin: coin)
-                            .onTapGesture {
-                                withAnimation(.easeIn) {
-                                    selectedCoin = coin
-                                }
-                            }
-                            .background(RoundedRectangle(cornerRadius: 10).stroke(selectedCoin?.id == coin.id ? Color.white : Color.clear, lineWidth: 2))
+        LazyVGrid(columns: columns) {
+            ForEach(viewModel.coinsData) { coin in
+                AddCoinCell(coin: coin)
+                    .onTapGesture {
+                        withAnimation(.easeIn) {
+                            selectedCoin = coin
+                            showBottomSheet = true
+                        }
                     }
-                }
+                    .background(RoundedRectangle(cornerRadius: 10).stroke(selectedCoin?.id == coin.id ? Color.white : Color.clear, lineWidth: 2))
             }
-            .scrollIndicators(.hidden)
-            
+        }
+    }
+    
+    private var bottomSheet: some View {
+        VStack(spacing: 20) {
             if selectedCoin != nil {
                 VStack(spacing: 20) {
                     HStack {
@@ -140,36 +150,37 @@ struct AddCoinView: View {
                     }
                 }
                 .padding()
+                .background(Color.backgroundCP)
+                .cornerRadius(12)
                 .font(.headline)
                 .foregroundColor(.textCP)
-            }
-            Spacer()
-            if !amountText.isEmpty {
-                withAnimation(.easeInOut) {
-                    Button(action: {
-                        if let selectedCoin = selectedCoin, let amount = Double(amountText), amount > 0 {
-                                viewModel.updateUserPortfolio(coin: selectedCoin, amount: amount)
-                                amountText = ""
-                                searchCoin = ""
-                            }
-                        selectedCoin = nil
-                    }, label: {
-                        Text("Save")
-                            .font(.title2)
-                            .fontWeight(.medium)
-                            .foregroundStyle(.textCP)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 55)
-                            .background(
-                                Color.green
-                            )
-                            .cornerRadius(12)
-                    })
-                }
-            }
                 
-            Spacer()
+                Button(action: {
+                    if let selectedCoin = selectedCoin, let amount = Double(amountText), amount > 0 {
+                        viewModel.updateUserPortfolio(coin: selectedCoin, amount: amount)
+                        amountText = ""
+                        searchCoin = ""
+                    }
+                    selectedCoin = nil
+                    showBottomSheet = false
+                }, label: {
+                    Text("Save")
+                        .font(.title2)
+                        .fontWeight(.medium)
+                        .foregroundStyle(.textCP)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 55)
+                        .background(Color.green)
+                        .cornerRadius(12)
+                })
+            }
         }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(Color.backgroundCP.ignoresSafeArea())
+        .cornerRadius(20)
+        .shadow(radius: 20)
+        .animation(.easeInOut(duration: 0.1), value: showBottomSheet)
     }
 }
 

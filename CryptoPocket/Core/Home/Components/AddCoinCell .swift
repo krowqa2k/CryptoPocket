@@ -21,9 +21,11 @@ struct AddCoinCell: View {
                     .font(.title3)
                     .foregroundStyle(.textCP)
                     .fontWeight(.medium)
+                    .lineLimit(1)
                 Text(coin.name)
                     .font(.footnote)
                     .foregroundStyle(.secondaryTextCP)
+                    .lineLimit(1)
             }
         }
         .padding(.horizontal, 12)
