@@ -61,7 +61,7 @@ final class UserPortfolioDataService {
     }
     
     private func updateAmount(entity: PortfolioEntity, amount: Double) {
-        entity.amount = amount
+        entity.amount += amount
         applyChanges()
     }
     
