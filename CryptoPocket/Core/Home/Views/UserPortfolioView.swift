@@ -42,8 +42,8 @@ struct UserPortfolioView: View {
                                 .fontWeight(.medium)
                                 .foregroundStyle(.textCP)
                                 .fontDesign(.rounded)
-                            
-                            Text("\(viewModel.portfolioChange24h.asNumberString())% 24H")
+                        
+                            Text("\(viewModel.portfolioChange24h.asNumberString())% last 24H")
                                 .font(.subheadline)
                                 .foregroundStyle(viewModel.portfolioChange24h >= 0 ? .green : .red)
                         }
