@@ -29,8 +29,9 @@ App Demo 🎥:
   <img src="https://github.com/user-attachments/assets/45f0cb83-5638-49c8-b1cf-b8d3133e5562" alt="Screenshot 3" width="250"/>
   <img src="https://github.com/user-attachments/assets/f8f49400-aaeb-4efa-a64e-ee23bdc0ff6e" alt="Screenshot 1" width="250"/>
   <img src="https://github.com/user-attachments/assets/53158b91-1cab-406d-a354-f187b9314d96" alt="Screenshot 4" width="250"/>
-  <img src="https://github.com/user-attachments/assets/66d7cb38-f1d7-492a-9027-293cac6a7422" alt="Screenshot 5" width="250"/>
-  <img src="https://github.com/user-attachments/assets/5508abae-8a02-4e46-9712-00fe18254fee" alt="Screenshot 6" width="250"/>
-  <img src="https://github.com/user-attachments/assets/53982b83-9acc-414d-a33d-e3aaa444db36" alt="Screenshot 7" width="250"/>
+  <img src="https://github.com/user-attachments/assets/2e719517-5fc7-4eb8-95ae-a57d0348d26a" alt="Screenshot 5" width="250"/>
+  <img src="https://github.com/user-attachments/assets/436591fe-a3cd-4c46-a43a-ff974cfc555c" alt="Screenshot 6" width="250"/>
+  <img src="https://github.com/user-attachments/assets/5508abae-8a02-4e46-9712-00fe18254fee" alt="Screenshot 7" width="250"/>
+  <img src="https://github.com/user-attachments/assets/53982b83-9acc-414d-a33d-e3aaa444db36" alt="Screenshot 9" width="250"/>
 </div>
 
